@@ -3,7 +3,7 @@
 module Tf2Stats
   class Round
     attr_reader :captures, :duration
-    attr_accessor :start_time, :winner
+    attr_accessor :start_time, :end_time, :winner
 
     def initialize
       @duration = 0
@@ -12,7 +12,6 @@ module Tf2Stats
 
     def add_capture point_capture
       @captures << point_capture
-      @duration += point_capture.duration
     end
 
     def won_blu?
@@ -29,6 +28,10 @@ module Tf2Stats
 
     def captures_count
       @captures.size
+    end
+
+    def duration
+      @end_time - @start_time
     end
   end
 end

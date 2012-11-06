@@ -2,18 +2,20 @@
 
 module Tf2Stats
   class Match
-    attr_reader :rounds, :duration, :scores
-    attr_accessor :date, :red, :blu, :map
+    attr_reader :rounds, :scores
+    attr_accessor :date, :red, :blu, :map, :end_time
 
-    def initialize 
-      @duration = 0
+    def initialize
       @rounds = []
       @scores = [{:red => 0, :blu => 0}]
     end
 
+    def duration
+      @end_time      
+    end
+
     def add_round round
       @rounds << round
-      @duration += round.duration
       add_score round.winner
     end
 

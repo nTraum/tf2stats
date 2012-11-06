@@ -1,4 +1,3 @@
-#require './match'
 require 'date'
 require 'logger'
 
@@ -16,17 +15,18 @@ module Tf2Stats
     @@DATE_FORMAT = '%m/%d/%Y - %T'
 
     def initialize
-       @match = @curr_round = @curr_cap = nil
+      @match = @curr_round = @curr_cap = nil
       @valid = @match_finished = false
       @log = Logger.new(STDOUT)
       @log.level = Logger::INFO
+      @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
 
     def parse_file (file, red='Red', blu='Blu', map=nil)
       return unless File.readable? file
 
-      @log.info "Parsing '#{file}'"
-      @log.info "Map: #{map || "none"}, Blu: #{blu}, Red: #{red}"
+      @log.info {"Parsing '#{file}'"}
+      @log.info {"Map: #{map || "none"}, Blu: #{blu}, Red: #{red}"}
       @match = Match.new
       @match.red = red
       @match.blu = blu
@@ -34,7 +34,7 @@ module Tf2Stats
 
       File.open(file).each do |l|
         line_number += 1
-        @log.debug{ line_number }
+        @log.debug{line_number}
         break if @match_finished
         case l
         when @@REGEX_ROUND_START
@@ -56,8 +56,8 @@ module Tf2Stats
         end
       end
 
-      @log.info 'Parsing finished.'
-      @log.info "Score: #{@match.red} #{@match.final_score[:red]}:#{@match.final_score[:blu]} #{@match.blu}"
+      @log.info {'Parsing finished.'}
+      @log.info {"Score: #{@match.red} #{@match.final_score[:red]}:#{@match.final_score[:blu]} #{@match.blu}"}
       @match
     end
 
@@ -66,69 +66,89 @@ module Tf2Stats
       DateTime.strptime(string, @@DATE_FORMAT).to_time
     end
 
+    def relative_time (date)
+      date - @match.date
+    end
+
+    def duration_to_s (duration)
+      secs  = duration.to_int
+      mins  = secs / 60
+      "%02d:%02d" % [mins, secs % 60]
+    end
+
     def process_round_start (date_str)
-      @valid = true
       date = parseDate(date_str)
+      @valid = true
       @match.date = date if @match.rounds.empty?
-      @log.info "Match start" if @match.rounds.empty?
-      @log.info "Round start"
       @curr_cap = PointCapture.new
-      @curr_cap.start_time = date - @match.date
+      @curr_cap.start_time = relative_time(date)
       @curr_round = Round.new
-      @curr_round.start_time = date - @match.date
+      @curr_round.start_time = relative_time(date)
+      @log.info {"#{duration_to_s (relative_time(date))} - Match start"} if @match.rounds.empty?
+      @log.info {"#{duration_to_s (relative_time(date))} - Round start"}
     end
 
     def process_round_end_win (date_str, team)
-      @log.info "Round win: #{team}"
+      date = parseDate(date_str)
       @valid = false
       @curr_round.winner = @@TEAM_SYMBOL[team]
+      @curr_round.end_time = relative_time(date)
       @match.add_round @curr_round
+      @log.info {"#{duration_to_s (relative_time(date))} - Round win: #{team}"}
     end
 
     def process_round_end_stalemate (date_str)
-      @log.info "Round stalemate"
+      date = parseDate(date_str)
       @valid = false
       @curr_round.winner = nil
+      @ccurr_round.end_time = relative_time(date)
       @match.add_round @curr_round
+      @log.info {"#{duration_to_s (relative_time(date))} - Round stalemate"}
+
     end
 
     def process_match_end (date_str)
-      @log.info "Game over"
+      date = parseDate(date_str)
+      @match.end_time = relative_time(date)
       @valid = false
       @match_finished = true
+      @log.info {"#{duration_to_s (relative_time(date))} - Game over"}
     end
 
     def process_capture (date_str, team, cap_number, cap_name)
-      @log.info "Capture: Team #{team} => #{cap_name}(#{cap_number})"
       date = parseDate(date_str)
       @curr_cap.winner = @@TEAM_SYMBOL[team]
       @curr_cap.number = cap_number
       @curr_cap.name = cap_name
-      @curr_cap.duration = date - @curr_cap.start_time
+      @curr_cap.end_time = relative_time(date)
       @curr_round.add_capture @curr_cap
 
       @curr_cap = PointCapture.new
-      @curr_cap.start_time = date - @match.date
+      @curr_cap.start_time = relative_time(date)
+      @log.info {"#{duration_to_s (relative_time(date))} - Capture: Team #{team} => #{cap_name}(#{cap_number})"}
     end
 
     def process_damage (date_str, player, team, value)
       return unless @valid
-      @log.info "Damage: #{player}[#{team}] (#{value})"
+      date = parseDate(date_str)
       @curr_cap.add_damage @@TEAM_SYMBOL[team], player, value.to_i
+      @log.info {"#{duration_to_s (relative_time(date))} - Damage: #{player}[#{team}] (#{value})"}
     end
 
     def process_heal (date_str, healer, healer_team, target, target_team, value)
       return unless @valid
-      @log.info "Heal: #{healer}[#{healer_team}] => #{target}[#{target_team}] (#{value})"
+      date = parseDate(date_str)
       @curr_cap.add_heal @@TEAM_SYMBOL[healer_team], healer, value.to_i
       @curr_cap.add_healed @@TEAM_SYMBOL[target_team], target, value.to_i
+      @log.info {"#{duration_to_s (relative_time(date))} - Heal: #{healer}[#{healer_team}] => #{target}[#{target_team}] (#{value})"}
     end
 
     def process_kill (date_str, killer, killer_team, target, target_team)
       return unless @valid
-      @log.info "Kill: #{killer}[#{killer_team}] => #{target}[#{target_team}]"
+      date = parseDate(date_str)
       @curr_cap.add_kill @@TEAM_SYMBOL[killer_team], killer
       @curr_cap.add_death @@TEAM_SYMBOL[target_team], target
+      @log.info {"#{duration_to_s (relative_time(date))} - Kill: #{killer}[#{killer_team}] => #{target}[#{target_team}]"}
     end
   end
 end

@@ -1,7 +1,7 @@
 module Tf2Stats
   class PointCapture
     attr_reader :kills, :deaths, :damage, :healed, :heals
-    attr_accessor :start_time, :duration, :winner, :number, :name
+    attr_accessor :start_time, :end_time, :winner, :number, :name
 
     def initialize
       @kills = {:red => Hash.new(0), :blu => Hash.new(0)}
@@ -29,6 +29,10 @@ module Tf2Stats
 
     def add_heal(team, player, value)
       @heals[team][player] += value
+    end
+
+    def duration
+      @end_time - @start_time
     end
   end
 end
