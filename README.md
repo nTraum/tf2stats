@@ -1,5 +1,6 @@
 # Tf2Stats
 
+<<<<<<< HEAD
 Tf2Stats is a log file parser for Team Fortress 2, very similiar to http://tf2logs.com (checkout the website and https://github.com/barncow/tf2logparser).
 
 It reads log files from competitive matches (`mp_tournament 1`) and extracts it's various information (kills, deaths, caps, heals, damages) in a much more accessible manner. To receive all mentioned stats, you have to install either [tf2log's Supplemental Stats Plugin](http://tf2logs.com/plugins) (SourceMod plugin) or Anakin's [TFTrue](http://tftrue.redline-utilities.net/) (standalone) on your gameserver.
