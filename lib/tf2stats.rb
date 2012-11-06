@@ -1,0 +1,5 @@
+require 'tf2stats/version'
+require 'tf2stats/point_capture'
+require 'tf2stats/round'
+require 'tf2stats/match'
+require 'tf2stats/parser'
