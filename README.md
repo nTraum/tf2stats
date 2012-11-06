@@ -1,6 +1,8 @@
-# Tf2stats
+# Tf2Stats
 
-TODO: Write a gem description
+Tf2Stats is a log file parser for Team Fortress 2, very similiar to http://tf2logs.com (checkout the website and https://github.com/barncow/tf2logparser).
+
+It reads log files from competitive matches (`mp_tournament 1`) and extracts it's various information (kills, deaths, caps, heals, damages) in a much more accessible manner. To receive all mentioned stats, you have to install either [tf2log's Supplemental Stats Plugin](http://tf2logs.com/plugins) (SourceMod plugin) or Anakin's [TFTrue](http://tftrue.redline-utilities.net/) (standalone) on your gameserver.
 
 ## Installation
 
@@ -19,11 +21,3 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
