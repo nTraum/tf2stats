@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = Tf2Stats::VERSION
   gem.authors       = ["Philipp Preß"]
   gem.email         = ["philipp.press@googlemail.com"]
-  gem.description   = %q{Log Parser for Team Fortress 2 matches}
-  gem.summary       = %q{Log Parser for Team Fortress 2 matches}
-  gem.homepage      = ""
+  gem.description   = %q{Access statistics such as kills, deaths, damage, heals etc. from your matches.}
+  gem.summary       = %q{Log File Parser for Team Fortress 2 matches, collects various statistics.}
+  gem.homepage      = "https://github.com/nTraum/tf2stats"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

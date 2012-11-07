@@ -23,16 +23,20 @@ module Tf2Stats
     end
 
     def parse_file (file, red='Red', blu='Blu', map=nil)
-      return unless File.readable? file
-
+      return unless File.readable?(file)
       @log.info {"Parsing '#{file}'"}
+      File.open(file) {|f| parse_string(f.read, red, blu, map)}
+    end
+
+    def parse_string (string, red='Red', blu='Blu', map=nil)
       @log.info {"Map: #{map || "none"}, Blu: #{blu}, Red: #{red}"}
       @match = Match.new
       @match.red = red
       @match.blu = blu
+      @match.map = map
       line_number = 0
 
-      File.open(file).each do |l|
+      string.lines.each do |l|
         line_number += 1
         @log.debug{line_number}
         break if @match_finished
