@@ -1,5 +1,3 @@
-require 'tf2stats/version'
-require 'tf2stats/point_capture'
-require 'tf2stats/round'
-require 'tf2stats/match'
-require 'tf2stats/parser'
+%w(version point_capture round match parser).each do |e|
+  require "tf2stats/#{e}"
+end
