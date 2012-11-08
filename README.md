@@ -25,11 +25,11 @@ Feed the Parser with a log file:
 ```ruby
 require 'tf2stats'
 parser = Tf2Stats::Parser.new
-match = parser.parse_file('mylog.log')
-# match = parser.parse_file('mylog.log', 'Epsilon', 'TLR', 'cp_badlands')
+match = parser.parse_file('mylog.log', 'Epsilon', 'TLR', 'cp_badlands')
+# match = parser.parse_file('mylog.log')
 ```
 
-The various statistics can be found inside the returned `Match` object
+The parsed information can be found inside the returned `Match` object.
 
 ### Winner
 ```ruby
@@ -94,3 +94,5 @@ match.rounds[0].captures[0].winner #=> :red
 ```ruby
 match.rounds[0].captures[0].healed[:blu] #=> {"TLR Cyber"=>203, "TLR droso"=>2, "TLR HYS"=>51}
 ```
+
+Long story short, you can access all the gathered statistics on any level (whole match, one round, one capture).
