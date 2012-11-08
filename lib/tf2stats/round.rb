@@ -32,6 +32,11 @@ module Tf2Stats
       @winner.nil?
     end
 
+    def won_mid?
+      return nil if @captures.empty?
+      return @winner == @captures[0].winner
+    end
+
     def captures_count
       @captures.size
     end
