@@ -1,4 +1,5 @@
 # Tf2Stats
+[![Build Status](https://secure.travis-ci.org/nTraum/tf2stats.png)](http://travis-ci.org/nTraum/tf2stats)
 
 Tf2Stats is a log file parser for Team Fortress 2, very similiar to http://tf2logs.com (checkout the website and https://github.com/barncow/tf2logparser).
 
@@ -68,7 +69,7 @@ match.heals[:red]['Epsilon KnOxXx'] #=> 7521
 ```
 
 ### Break down
-The `Match` object also holds an array of all rounds that has been played: 
+The `Match` object also holds an array of all rounds that has been played:
 
 ```ruby
 match.rounds[3].start_time #=> 1034.0 (relative to match begin)
