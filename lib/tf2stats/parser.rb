@@ -10,6 +10,7 @@ module Tf2Stats
     @@REGEX_DAMAGE = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" triggered "damage" \(damage "(?'value'\d+)"\)/
     @@REGEX_HEAL = /L (?'date'.*): "(?'healer'.*)<\d+><STEAM_\S*><(?'healer_team'Red|Blue)>" triggered "healed" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" \(healing "(?'value'\d+)"\)/
     @@REGEX_KILL = /L (?'date'.*): "(?'killer'.*)<\d+><STEAM_\S*><(?'killer_team'Red|Blue)>" killed "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" with/
+    @@REGEX_ASSIST = /L (?'date'.*): "(?'assistant'.*)<\d+><STEAM_\S*><(?'assistant_team'Red|Blue)>" triggered "kill assist" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>"/
     @@REGEX_CAPTURE = /L (?'date'.*): Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'number'\d+)"\) \(cpname "(?'name'.*)"\) \(numcappers/
     @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
     @@DATE_FORMAT = '%m/%d/%Y - %T'
@@ -60,6 +61,8 @@ module Tf2Stats
           process_heal $1, $2, $3, $4, $5, $6
         when @@REGEX_KILL
           process_kill $1, $2, $3, $4, $5
+        when @@REGEX_ASSIST
+          process_assist $1, $2, $3, $4, $5
         end
       end
 
@@ -156,6 +159,13 @@ module Tf2Stats
       @curr_cap.stats.add_kill @@TEAM_SYMBOL[killer_team], killer
       @curr_cap.stats.add_death @@TEAM_SYMBOL[target_team], target
       @log.info {"#{duration_to_s (relative_time(date))} - Kill: #{killer}[#{killer_team}] => #{target}[#{target_team}]"}
+    end
+
+    def process_assist (date_str, assistant, assistant_team, target, target_team)
+      return unless @valid
+      date = parseDate(date_str)
+      @curr_cap.stats.add_assist @@TEAM_SYMBOL[assistant_team], assistant
+      @log.info {"#{duration_to_s (relative_time(date))} - Assist: #{assistant}[#{assistant_team}] => #{target}[#{target_team}]"}
     end
   end
 end

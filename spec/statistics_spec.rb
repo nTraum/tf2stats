@@ -14,6 +14,16 @@ describe Tf2Stats::Statistics do
       end
     end
 
+    describe '#assists' do
+      it 'has zero assists for team red' do
+        stats.assists[:red].should be_empty
+      end
+
+      it 'has zero assists for team blu' do
+        stats.assists[:blu].should be_empty
+      end
+    end
+
     describe '#deaths' do
       it 'has zero deaths for team red' do
         stats.deaths[:red].should be_empty

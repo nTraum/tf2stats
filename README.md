@@ -58,6 +58,7 @@ match.map #=> "cp_granary"
 ### Player statistics
 Statistics are collected for both teams and all their players. They're stored in corresponding hashes:
 * `kills`
+* `assists`
 * `deaths`
 * `damage`
 * `healed` (heals *received*)
