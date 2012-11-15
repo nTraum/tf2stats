@@ -22,18 +22,20 @@ module Tf2Stats
       @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
 
-    def parse_file (file, red='Red', blu='Blu', map=nil)
+    def parse_file (file, options={})
       return unless File.readable?(file)
       @log.info {"Parsing '#{file}'"}
-      File.open(file) {|f| parse_string(f.read, red, blu, map)}
+      File.open(file) {|f| parse_string(f.read, options)}
     end
 
-    def parse_string (string, red='Red', blu='Blu', map=nil)
-      @log.info {"Map: #{map || "none"}, Blu: #{blu}, Red: #{red}"}
+    def parse_string (string, options={})
+      default = {:red => 'Red', :blu => 'Blu', :map => 'N/A'}
+      options = default.merge(options)
       @match = Match.new
-      @match.red = red
-      @match.blu = blu
-      @match.map = map
+      @match.red = options[:red]
+      @match.blu = options[:blu]
+      @match.map = options[:map]
+      @log.info {"Map: #{@match.map}, Blu: #{@match.blu}, Red: #{@match.red}"}
       line_number = 0
 
       string.lines.each do |l|
@@ -135,23 +137,23 @@ module Tf2Stats
     def process_damage (date_str, player, team, value)
       return unless @valid
       date = parseDate(date_str)
-      @curr_cap.add_damage @@TEAM_SYMBOL[team], player, value.to_i
+      @curr_cap.stats.add_damage @@TEAM_SYMBOL[team], player, value.to_i
       @log.info {"#{duration_to_s (relative_time(date))} - Damage: #{player}[#{team}] (#{value})"}
     end
 
     def process_heal (date_str, healer, healer_team, target, target_team, value)
       return unless @valid
       date = parseDate(date_str)
-      @curr_cap.add_heal @@TEAM_SYMBOL[healer_team], healer, value.to_i
-      @curr_cap.add_healed @@TEAM_SYMBOL[target_team], target, value.to_i
+      @curr_cap.stats.add_heal @@TEAM_SYMBOL[healer_team], healer, value.to_i
+      @curr_cap.stats.add_healed @@TEAM_SYMBOL[target_team], target, value.to_i
       @log.info {"#{duration_to_s (relative_time(date))} - Heal: #{healer}[#{healer_team}] => #{target}[#{target_team}] (#{value})"}
     end
 
     def process_kill (date_str, killer, killer_team, target, target_team)
       return unless @valid
       date = parseDate(date_str)
-      @curr_cap.add_kill @@TEAM_SYMBOL[killer_team], killer
-      @curr_cap.add_death @@TEAM_SYMBOL[target_team], target
+      @curr_cap.stats.add_kill @@TEAM_SYMBOL[killer_team], killer
+      @curr_cap.stats.add_death @@TEAM_SYMBOL[target_team], target
       @log.info {"#{duration_to_s (relative_time(date))} - Kill: #{killer}[#{killer_team}] => #{target}[#{target_team}]"}
     end
   end

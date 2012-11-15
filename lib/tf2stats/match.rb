@@ -1,16 +1,16 @@
 module Tf2Stats
   class Match
-    attr_reader :rounds, :scores, :kills, :deaths, :damage, :healed, :heals
+    attr_reader :rounds, :scores, :stats
     attr_accessor :date, :red, :blu, :map, :end_time
 
     def initialize
-      @kills = {:red => Hash.new(0), :blu => Hash.new(0)}
-      @deaths = {:red => Hash.new(0), :blu => Hash.new(0)}
-      @damage = {:red => Hash.new(0), :blu => Hash.new(0)}
-      @healed = {:red => Hash.new(0), :blu => Hash.new(0)}
-      @heals = {:red => Hash.new(0), :blu => Hash.new(0)}
+      @stats = Statistics.new
       @rounds = []
       @scores = [{:red => 0, :blu => 0}]
+    end
+
+    def start_time
+      return 0
     end
 
     def duration
@@ -18,9 +18,9 @@ module Tf2Stats
     end
 
     def add_round round
+      @stats.add_sub_stats round.stats
       @rounds << round
       add_score round.winner
-      cumulate_stats round
     end
 
     def rounds_count
@@ -45,41 +45,13 @@ module Tf2Stats
     end
 
     def stalemate?
-      @scores.last[:red] == @scores.last[:blu]
+      won_blu? == false && won_red? == false
     end
 
     private
     def add_score team
       @scores << @scores.last.clone
       @scores.last[team] += 1 if team
-    end
-
-    def cumulate_stats (round)
-      round.kills.each_pair do |team, players|
-        players.each_pair do |player, value|
-          @kills[team][player] += value
-        end
-      end
-      round.deaths.each_pair do |team, players|
-        players.each_pair do |player, value|
-          @deaths[team][player] += value
-        end
-      end
-      round.damage.each_pair do |team, players|
-        players.each_pair do |player, value|
-          @damage[team][player] += value
-        end
-      end
-      round.healed.each_pair do |team, players|
-        players.each_pair do |player, value|
-          @healed[team][player] += value
-        end
-      end
-      round.heals.each_pair do |team, players|
-        players.each_pair do |player, value|
-          @heals[team][player] += value
-        end
-      end
     end
   end
 end

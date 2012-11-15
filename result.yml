@@ -1,0 +1,1134 @@
+--- !ruby/object:Tf2Stats::Match
+stats: !ruby/object:Tf2Stats::Statistics
+  kills:
+    :red:
+      nTraum: 5
+      Awpteamoose: 5
+      Warcloud: 7
+      Izzii: 7
+      Koala: 6
+    :blu:
+      ! '[En] Klogar': 19
+        kntsfld_leppi: 12
+      fr0w  ✈: 10
+      cruZer: 14
+      \V/ » .kr4tos digga?!: 9
+  deaths:
+    :red:
+      Izzii: 12
+      nTraum: 12
+      Awpteamoose: 12
+      Koala: 9
+      Warcloud: 10
+      doks: 9
+    :blu:
+      cruZer: 4
+      kntsfld_leppi: 8
+      ! '[En] Klogar': 7
+      fr0w  ✈: 4
+      \V/ » Cube: 4
+      \V/ » .kr4tos digga?!: 3
+  damage:
+    :red:
+      nTraum: 6384
+      Awpteamoose: 2374
+      Koala: 2039
+      Warcloud: 2228
+      Izzii: 4550
+    :blu:
+      cruZer: 5184
+      fr0w  ✈: 3734
+      ! '[En] Klogar': 5316
+      \V/ » .kr4tos digga?!: 3138
+      kntsfld_leppi: 4630
+  healed:
+    :red:
+      Warcloud: 1625
+      nTraum: 1490
+      Koala: 230
+      Awpteamoose: 222
+      Izzii: 1824
+    :blu:
+      kntsfld_leppi: 1341
+      ! '[En] Klogar': 2104
+      cruZer: 1548
+      fr0w  ✈: 376
+      \V/ » .kr4tos digga?!: 806
+  heals:
+    :red:
+      doks: 5391
+    :blu:
+      \V/ » Cube: 6175
+rounds:
+- !ruby/object:Tf2Stats::Round
+  stats: !ruby/object:Tf2Stats::Statistics
+    kills:
+      :red:
+        nTraum: 1
+        Awpteamoose: 1
+        Warcloud: 1
+      :blu:
+        ! '[En] Klogar': 3
+        kntsfld_leppi: 3
+        fr0w  ✈: 1
+        cruZer: 1
+    deaths:
+      :red:
+        Izzii: 3
+        nTraum: 2
+        Awpteamoose: 1
+        Koala: 1
+        Warcloud: 1
+      :blu:
+        cruZer: 1
+        kntsfld_leppi: 1
+        ! '[En] Klogar': 1
+    damage:
+      :red:
+        nTraum: 2124
+        Awpteamoose: 497
+        Koala: 326
+        Warcloud: 740
+        Izzii: 373
+      :blu:
+        cruZer: 1047
+        fr0w  ✈: 999
+        ! '[En] Klogar': 1348
+        \V/ » .kr4tos digga?!: 527
+        kntsfld_leppi: 1217
+    healed:
+      :red:
+        Warcloud: 701
+        nTraum: 502
+        Koala: 77
+        Awpteamoose: 78
+        Izzii: 392
+      :blu:
+        kntsfld_leppi: 404
+        ! '[En] Klogar': 477
+        cruZer: 318
+        fr0w  ✈: 163
+        \V/ » .kr4tos digga?!: 101
+    heals:
+      :red:
+        doks: 1750
+      :blu:
+        \V/ » Cube: 1463
+  captures:
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          ! '[En] Klogar': 1
+      deaths:
+        :red:
+          Izzii: 1
+        :blu: {}
+      damage:
+        :red:
+          nTraum: 630
+          Awpteamoose: 207
+          Koala: 76
+          Warcloud: 63
+        :blu:
+          cruZer: 488
+          fr0w  ✈: 220
+          ! '[En] Klogar': 303
+          \V/ » .kr4tos digga?!: 90
+          kntsfld_leppi: 51
+      healed:
+        :red:
+          Warcloud: 310
+          nTraum: 26
+        :blu:
+          kntsfld_leppi: 74
+          ! '[En] Klogar': 12
+          cruZer: 176
+          fr0w  ✈: 26
+          \V/ » .kr4tos digga?!: 26
+      heals:
+        :red:
+          doks: 336
+        :blu:
+          \V/ » Cube: 314
+    start_time: 0.0
+    winner: :blu
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 44.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          nTraum: 1
+          Awpteamoose: 1
+        :blu:
+          kntsfld_leppi: 1
+          fr0w  ✈: 1
+      deaths:
+        :red:
+          Izzii: 1
+          nTraum: 1
+        :blu:
+          cruZer: 1
+          kntsfld_leppi: 1
+      damage:
+        :red:
+          nTraum: 1494
+          Awpteamoose: 200
+          Koala: 145
+          Warcloud: 292
+          Izzii: 373
+        :blu:
+          ! '[En] Klogar': 415
+          cruZer: 377
+          fr0w  ✈: 432
+          kntsfld_leppi: 824
+          \V/ » .kr4tos digga?!: 289
+      healed:
+        :red:
+          nTraum: 420
+          Koala: 77
+          Warcloud: 178
+          Awpteamoose: 78
+          Izzii: 352
+        :blu:
+          \V/ » .kr4tos digga?!: 75
+          fr0w  ✈: 137
+          ! '[En] Klogar': 465
+          cruZer: 121
+          kntsfld_leppi: 159
+      heals:
+        :red:
+          doks: 1105
+        :blu:
+          \V/ » Cube: 957
+    start_time: 44.0
+    winner: :blu
+    number: '3'
+    name: the RED Forward Point
+    end_time: 169.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Warcloud: 1
+        :blu:
+          ! '[En] Klogar': 2
+          kntsfld_leppi: 2
+          cruZer: 1
+      deaths:
+        :red:
+          Izzii: 1
+          nTraum: 1
+          Awpteamoose: 1
+          Koala: 1
+          Warcloud: 1
+        :blu:
+          ! '[En] Klogar': 1
+      damage:
+        :red:
+          Awpteamoose: 90
+          Koala: 105
+          Warcloud: 385
+        :blu:
+          \V/ » .kr4tos digga?!: 148
+          ! '[En] Klogar': 630
+          fr0w  ✈: 347
+          cruZer: 182
+          kntsfld_leppi: 342
+      healed:
+        :red:
+          Warcloud: 213
+          Izzii: 40
+          nTraum: 56
+        :blu:
+          cruZer: 21
+          kntsfld_leppi: 171
+      heals:
+        :red:
+          doks: 309
+        :blu:
+          \V/ » Cube: 192
+    start_time: 169.0
+    winner: :blu
+    number: '4'
+    name: ! '#CP_cap_red_cp1'
+    end_time: 218.0
+  start_time: 0.0
+  winner: :blu
+  end_time: 218.0
+- !ruby/object:Tf2Stats::Round
+  stats: !ruby/object:Tf2Stats::Statistics
+    kills:
+      :red:
+        Izzii: 1
+        Awpteamoose: 1
+      :blu:
+        kntsfld_leppi: 2
+        cruZer: 1
+        ! '[En] Klogar': 4
+        \V/ » .kr4tos digga?!: 3
+    deaths:
+      :red:
+        Awpteamoose: 2
+        Izzii: 2
+        Warcloud: 2
+        nTraum: 2
+        Koala: 1
+        doks: 1
+      :blu:
+        ! '[En] Klogar': 1
+        kntsfld_leppi: 1
+    damage:
+      :red:
+        Awpteamoose: 342
+        nTraum: 812
+        Warcloud: 334
+        Koala: 185
+        Izzii: 769
+      :blu:
+        \V/ » .kr4tos digga?!: 356
+        fr0w  ✈: 461
+        cruZer: 556
+        ! '[En] Klogar': 711
+        kntsfld_leppi: 852
+    healed:
+      :red:
+        Izzii: 358
+        Warcloud: 167
+        nTraum: 104
+        Awpteamoose: 122
+      :blu:
+        ! '[En] Klogar': 272
+        kntsfld_leppi: 441
+        fr0w  ✈: 26
+        \V/ » .kr4tos digga?!: 236
+        cruZer: 227
+    heals:
+      :red:
+        doks: 751
+      :blu:
+        \V/ » Cube: 1202
+  captures:
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          kntsfld_leppi: 1
+          cruZer: 1
+          ! '[En] Klogar': 1
+      deaths:
+        :red:
+          Awpteamoose: 1
+          Izzii: 1
+          Warcloud: 1
+        :blu: {}
+      damage:
+        :red:
+          Awpteamoose: 54
+          nTraum: 379
+          Warcloud: 242
+          Koala: 136
+          Izzii: 139
+        :blu:
+          \V/ » .kr4tos digga?!: 101
+          fr0w  ✈: 225
+          cruZer: 261
+          ! '[En] Klogar': 139
+          kntsfld_leppi: 316
+      healed:
+        :red:
+          Izzii: 91
+          Warcloud: 167
+          nTraum: 104
+        :blu:
+          ! '[En] Klogar': 120
+          kntsfld_leppi: 185
+          fr0w  ✈: 26
+          \V/ » .kr4tos digga?!: 159
+          cruZer: 78
+      heals:
+        :red:
+          doks: 362
+        :blu:
+          \V/ » Cube: 568
+    start_time: 223.0
+    winner: :blu
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 279.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          ! '[En] Klogar': 1
+      deaths:
+        :red:
+          nTraum: 1
+        :blu: {}
+      damage:
+        :red:
+          Koala: 40
+          nTraum: 310
+          Awpteamoose: 15
+          Izzii: 146
+          Warcloud: 36
+        :blu:
+          cruZer: 32
+          ! '[En] Klogar': 360
+          \V/ » .kr4tos digga?!: 53
+          fr0w  ✈: 0
+          kntsfld_leppi: 147
+      healed:
+        :red:
+          Awpteamoose: 51
+        :blu:
+          cruZer: 50
+          ! '[En] Klogar': 101
+      heals:
+        :red:
+          doks: 51
+        :blu:
+          \V/ » Cube: 151
+    start_time: 279.0
+    winner: :blu
+    number: '3'
+    name: the RED Forward Point
+    end_time: 296.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Izzii: 1
+          Awpteamoose: 1
+        :blu:
+          ! '[En] Klogar': 2
+          kntsfld_leppi: 1
+          \V/ » .kr4tos digga?!: 3
+      deaths:
+        :red:
+          Koala: 1
+          Warcloud: 1
+          nTraum: 1
+          doks: 1
+          Izzii: 1
+          Awpteamoose: 1
+        :blu:
+          ! '[En] Klogar': 1
+          kntsfld_leppi: 1
+      damage:
+        :red:
+          Awpteamoose: 273
+          Izzii: 484
+          Warcloud: 56
+          nTraum: 123
+          Koala: 9
+        :blu:
+          cruZer: 263
+          kntsfld_leppi: 389
+          ! '[En] Klogar': 212
+          \V/ » .kr4tos digga?!: 202
+          fr0w  ✈: 236
+      healed:
+        :red:
+          Izzii: 267
+          Awpteamoose: 71
+        :blu:
+          ! '[En] Klogar': 51
+          kntsfld_leppi: 256
+          cruZer: 99
+          \V/ » .kr4tos digga?!: 77
+      heals:
+        :red:
+          doks: 338
+        :blu:
+          \V/ » Cube: 483
+    start_time: 296.0
+    winner: :blu
+    number: '4'
+    name: ! '#CP_cap_red_cp1'
+    end_time: 326.0
+  start_time: 223.0
+  winner: :blu
+  end_time: 326.0
+- !ruby/object:Tf2Stats::Round
+  stats: !ruby/object:Tf2Stats::Statistics
+    kills:
+      :red:
+        Koala: 2
+        Warcloud: 2
+        Izzii: 2
+        nTraum: 1
+      :blu:
+        ! '[En] Klogar': 6
+        cruZer: 4
+        kntsfld_leppi: 3
+        fr0w  ✈: 4
+        \V/ » .kr4tos digga?!: 1
+    deaths:
+      :red:
+        Awpteamoose: 3
+        doks: 4
+        nTraum: 3
+        Warcloud: 3
+        Koala: 3
+        Izzii: 2
+      :blu:
+        cruZer: 2
+        fr0w  ✈: 1
+        \V/ » Cube: 1
+        kntsfld_leppi: 2
+        ! '[En] Klogar': 1
+    damage:
+      :red:
+        nTraum: 1360
+        Koala: 487
+        Awpteamoose: 460
+        Izzii: 1291
+        Warcloud: 225
+      :blu:
+        cruZer: 1084
+        \V/ » .kr4tos digga?!: 575
+        fr0w  ✈: 948
+        ! '[En] Klogar': 1402
+        kntsfld_leppi: 944
+    healed:
+      :red:
+        Izzii: 271
+        Warcloud: 135
+        nTraum: 469
+        Awpteamoose: 22
+        Koala: 67
+      :blu:
+        ! '[En] Klogar': 668
+        cruZer: 249
+        \V/ » .kr4tos digga?!: 180
+        kntsfld_leppi: 183
+        fr0w  ✈: 99
+    heals:
+      :red:
+        doks: 964
+      :blu:
+        \V/ » Cube: 1379
+  captures:
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Koala: 2
+          Warcloud: 1
+          Izzii: 2
+        :blu:
+          ! '[En] Klogar': 3
+      deaths:
+        :red:
+          Awpteamoose: 1
+          doks: 1
+          nTraum: 1
+        :blu:
+          cruZer: 1
+          fr0w  ✈: 1
+          \V/ » Cube: 1
+          kntsfld_leppi: 1
+          ! '[En] Klogar': 1
+      damage:
+        :red:
+          nTraum: 374
+          Koala: 214
+          Awpteamoose: 137
+          Izzii: 407
+          Warcloud: 41
+        :blu:
+          cruZer: 218
+          \V/ » .kr4tos digga?!: 40
+          fr0w  ✈: 120
+          ! '[En] Klogar': 625
+          kntsfld_leppi: 60
+      healed:
+        :red:
+          Izzii: 134
+          Warcloud: 48
+          nTraum: 196
+        :blu:
+          ! '[En] Klogar': 65
+          cruZer: 51
+          \V/ » .kr4tos digga?!: 22
+      heals:
+        :red:
+          doks: 378
+        :blu:
+          \V/ » Cube: 138
+    start_time: 331.0
+    winner: :red
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 382.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Warcloud: 1
+        :blu:
+          cruZer: 3
+          kntsfld_leppi: 3
+          fr0w  ✈: 1
+      deaths:
+        :red:
+          Warcloud: 2
+          doks: 1
+          Koala: 1
+          Awpteamoose: 1
+          Izzii: 1
+          nTraum: 1
+        :blu:
+          kntsfld_leppi: 1
+      damage:
+        :red:
+          Koala: 219
+          Warcloud: 160
+          nTraum: 587
+          Izzii: 598
+          Awpteamoose: 66
+        :blu:
+          \V/ » .kr4tos digga?!: 220
+          fr0w  ✈: 314
+          kntsfld_leppi: 810
+          cruZer: 588
+          ! '[En] Klogar': 315
+      healed:
+        :red:
+          nTraum: 224
+          Warcloud: 87
+          Awpteamoose: 22
+          Izzii: 137
+          Koala: 67
+        :blu:
+          cruZer: 168
+          \V/ » .kr4tos digga?!: 112
+          kntsfld_leppi: 142
+          ! '[En] Klogar': 562
+      heals:
+        :red:
+          doks: 537
+        :blu:
+          \V/ » Cube: 984
+    start_time: 382.0
+    winner: :blu
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 537.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          fr0w  ✈: 1
+          cruZer: 1
+      deaths:
+        :red:
+          doks: 1
+          Koala: 1
+        :blu: {}
+      damage:
+        :red:
+          Koala: 24
+          Izzii: 94
+        :blu:
+          fr0w  ✈: 94
+          \V/ » .kr4tos digga?!: 126
+          cruZer: 136
+      healed:
+        :red: {}
+        :blu:
+          ! '[En] Klogar': 41
+          cruZer: 7
+      heals:
+        :red: {}
+        :blu:
+          \V/ » Cube: 48
+    start_time: 537.0
+    winner: :blu
+    number: '3'
+    name: the RED Forward Point
+    end_time: 553.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          nTraum: 1
+        :blu:
+          ! '[En] Klogar': 3
+          \V/ » .kr4tos digga?!: 1
+          fr0w  ✈: 2
+      deaths:
+        :red:
+          Warcloud: 1
+          Izzii: 1
+          Awpteamoose: 1
+          Koala: 1
+          doks: 1
+          nTraum: 1
+        :blu:
+          cruZer: 1
+      damage:
+        :red:
+          Izzii: 192
+          Warcloud: 24
+          Awpteamoose: 257
+          Koala: 30
+          nTraum: 399
+        :blu:
+          \V/ » .kr4tos digga?!: 189
+          ! '[En] Klogar': 462
+          fr0w  ✈: 420
+          cruZer: 142
+          kntsfld_leppi: 74
+      healed:
+        :red:
+          nTraum: 49
+        :blu:
+          cruZer: 23
+          fr0w  ✈: 99
+          \V/ » .kr4tos digga?!: 46
+          kntsfld_leppi: 41
+      heals:
+        :red:
+          doks: 49
+        :blu:
+          \V/ » Cube: 209
+    start_time: 553.0
+    winner: :blu
+    number: '4'
+    name: ! '#CP_cap_red_cp1'
+    end_time: 586.0
+  start_time: 331.0
+  winner: :blu
+  end_time: 586.0
+- !ruby/object:Tf2Stats::Round
+  stats: !ruby/object:Tf2Stats::Statistics
+    kills:
+      :red:
+        Koala: 1
+      :blu:
+        \V/ » .kr4tos digga?!: 1
+        cruZer: 3
+        fr0w  ✈: 2
+        kntsfld_leppi: 2
+        ! '[En] Klogar': 1
+    deaths:
+      :red:
+        Awpteamoose: 2
+        Izzii: 2
+        Koala: 2
+        Warcloud: 1
+        doks: 1
+        nTraum: 1
+      :blu:
+        kntsfld_leppi: 1
+    damage:
+      :red:
+        Koala: 406
+        Awpteamoose: 174
+        nTraum: 491
+        Izzii: 397
+        Warcloud: 33
+      :blu:
+        fr0w  ✈: 395
+        \V/ » .kr4tos digga?!: 140
+        cruZer: 769
+        ! '[En] Klogar': 483
+        kntsfld_leppi: 642
+    healed:
+      :red:
+        Warcloud: 215
+        Izzii: 78
+        nTraum: 55
+      :blu:
+        ! '[En] Klogar': 293
+        cruZer: 394
+        kntsfld_leppi: 195
+    heals:
+      :red:
+        doks: 348
+      :blu:
+        \V/ » Cube: 882
+  captures:
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          \V/ » .kr4tos digga?!: 1
+          cruZer: 1
+          fr0w  ✈: 1
+      deaths:
+        :red:
+          Awpteamoose: 1
+          Izzii: 1
+          Koala: 1
+        :blu: {}
+      damage:
+        :red:
+          Koala: 196
+          Awpteamoose: 149
+          nTraum: 204
+          Izzii: 122
+          Warcloud: 33
+        :blu:
+          fr0w  ✈: 88
+          \V/ » .kr4tos digga?!: 131
+          cruZer: 265
+          ! '[En] Klogar': 234
+          kntsfld_leppi: 100
+      healed:
+        :red:
+          Warcloud: 180
+          Izzii: 78
+          nTraum: 55
+        :blu:
+          ! '[En] Klogar': 267
+          cruZer: 194
+          kntsfld_leppi: 52
+      heals:
+        :red:
+          doks: 313
+        :blu:
+          \V/ » Cube: 513
+    start_time: 591.0
+    winner: :blu
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 642.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red: {}
+        :blu:
+          kntsfld_leppi: 1
+          ! '[En] Klogar': 1
+      deaths:
+        :red:
+          Warcloud: 1
+          doks: 1
+        :blu: {}
+      damage:
+        :red:
+          nTraum: 287
+          Izzii: 164
+        :blu:
+          kntsfld_leppi: 311
+          cruZer: 122
+          ! '[En] Klogar': 249
+      healed:
+        :red:
+          Warcloud: 35
+        :blu:
+          cruZer: 91
+          kntsfld_leppi: 51
+      heals:
+        :red:
+          doks: 35
+        :blu:
+          \V/ » Cube: 142
+    start_time: 642.0
+    winner: :blu
+    number: '3'
+    name: the RED Forward Point
+    end_time: 659.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Koala: 1
+        :blu:
+          kntsfld_leppi: 1
+          fr0w  ✈: 1
+          cruZer: 2
+      deaths:
+        :red:
+          Izzii: 1
+          Koala: 1
+          nTraum: 1
+          Awpteamoose: 1
+        :blu:
+          kntsfld_leppi: 1
+      damage:
+        :red:
+          Izzii: 111
+          Awpteamoose: 25
+          Koala: 210
+        :blu:
+          cruZer: 382
+          kntsfld_leppi: 231
+          fr0w  ✈: 307
+          \V/ » .kr4tos digga?!: 9
+      healed:
+        :red: {}
+        :blu:
+          kntsfld_leppi: 92
+          cruZer: 109
+          ! '[En] Klogar': 26
+      heals:
+        :red: {}
+        :blu:
+          \V/ » Cube: 227
+    start_time: 659.0
+    winner: :blu
+    number: '4'
+    name: ! '#CP_cap_red_cp1'
+    end_time: 677.0
+  start_time: 591.0
+  winner: :blu
+  end_time: 677.0
+- !ruby/object:Tf2Stats::Round
+  stats: !ruby/object:Tf2Stats::Statistics
+    kills:
+      :red:
+        nTraum: 3
+        Izzii: 4
+        Awpteamoose: 3
+        Warcloud: 4
+        Koala: 3
+      :blu:
+        ! '[En] Klogar': 5
+        kntsfld_leppi: 2
+        \V/ » .kr4tos digga?!: 4
+        fr0w  ✈: 3
+        cruZer: 5
+    deaths:
+      :red:
+        Awpteamoose: 4
+        Koala: 2
+        Izzii: 3
+        Warcloud: 3
+        doks: 3
+        nTraum: 4
+      :blu:
+        ! '[En] Klogar': 4
+        cruZer: 1
+        \V/ » Cube: 3
+        \V/ » .kr4tos digga?!: 3
+        fr0w  ✈: 3
+        kntsfld_leppi: 3
+    damage:
+      :red:
+        nTraum: 1597
+        Koala: 635
+        Awpteamoose: 901
+        Izzii: 1720
+        Warcloud: 896
+      :blu:
+        \V/ » .kr4tos digga?!: 1540
+        fr0w  ✈: 931
+        ! '[En] Klogar': 1372
+        cruZer: 1728
+        kntsfld_leppi: 975
+    healed:
+      :red:
+        Warcloud: 407
+        Izzii: 725
+        nTraum: 360
+        Koala: 86
+      :blu:
+        ! '[En] Klogar': 394
+        cruZer: 360
+        \V/ » .kr4tos digga?!: 289
+        kntsfld_leppi: 118
+        fr0w  ✈: 88
+    heals:
+      :red:
+        doks: 1578
+      :blu:
+        \V/ » Cube: 1249
+  captures:
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          nTraum: 1
+          Izzii: 2
+          Awpteamoose: 1
+        :blu:
+          ! '[En] Klogar': 1
+          kntsfld_leppi: 2
+          \V/ » .kr4tos digga?!: 2
+          fr0w  ✈: 1
+      deaths:
+        :red:
+          Awpteamoose: 1
+          Koala: 1
+          Izzii: 1
+          Warcloud: 1
+          doks: 1
+          nTraum: 1
+        :blu:
+          ! '[En] Klogar': 1
+          cruZer: 1
+          \V/ » Cube: 1
+          \V/ » .kr4tos digga?!: 1
+      damage:
+        :red:
+          nTraum: 367
+          Koala: 80
+          Awpteamoose: 227
+          Izzii: 425
+          Warcloud: 17
+        :blu:
+          \V/ » .kr4tos digga?!: 342
+          fr0w  ✈: 214
+          ! '[En] Klogar': 218
+          cruZer: 34
+          kntsfld_leppi: 588
+      healed:
+        :red:
+          Warcloud: 110
+          Izzii: 88
+          nTraum: 103
+        :blu:
+          ! '[En] Klogar': 51
+          cruZer: 83
+          \V/ » .kr4tos digga?!: 1
+      heals:
+        :red:
+          doks: 301
+        :blu:
+          \V/ » Cube: 135
+    start_time: 682.0
+    winner: :blu
+    number: '2'
+    name: ! '#CP_cap_cp3'
+    end_time: 745.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Warcloud: 1
+          Awpteamoose: 1
+        :blu:
+          cruZer: 1
+      deaths:
+        :red:
+          Izzii: 1
+        :blu:
+          fr0w  ✈: 1
+          \V/ » .kr4tos digga?!: 1
+      damage:
+        :red:
+          nTraum: 249
+          Warcloud: 249
+          Koala: 22
+          Izzii: 307
+          Awpteamoose: 269
+        :blu:
+          fr0w  ✈: 291
+          \V/ » .kr4tos digga?!: 85
+          kntsfld_leppi: 88
+          ! '[En] Klogar': 316
+          cruZer: 322
+      healed:
+        :red:
+          nTraum: 207
+          Warcloud: 62
+          Izzii: 24
+        :blu:
+          ! '[En] Klogar': 77
+          cruZer: 99
+          kntsfld_leppi: 57
+      heals:
+        :red:
+          doks: 293
+        :blu:
+          \V/ » Cube: 233
+    start_time: 745.0
+    winner: :blu
+    number: '3'
+    name: the RED Forward Point
+    end_time: 798.0
+  - !ruby/object:Tf2Stats::PointCapture
+    stats: !ruby/object:Tf2Stats::Statistics
+      kills:
+        :red:
+          Izzii: 2
+          Koala: 3
+          nTraum: 2
+          Awpteamoose: 1
+          Warcloud: 3
+        :blu:
+          ! '[En] Klogar': 4
+          fr0w  ✈: 2
+          \V/ » .kr4tos digga?!: 2
+          cruZer: 4
+      deaths:
+        :red:
+          Warcloud: 2
+          Awpteamoose: 3
+          Koala: 1
+          Izzii: 1
+          doks: 2
+          nTraum: 3
+        :blu:
+          fr0w  ✈: 2
+          kntsfld_leppi: 3
+          ! '[En] Klogar': 3
+          \V/ » Cube: 2
+          \V/ » .kr4tos digga?!: 1
+      damage:
+        :red:
+          Awpteamoose: 405
+          Koala: 533
+          nTraum: 981
+          Warcloud: 630
+          Izzii: 988
+        :blu:
+          fr0w  ✈: 426
+          ! '[En] Klogar': 838
+          \V/ » .kr4tos digga?!: 1113
+          cruZer: 1372
+          kntsfld_leppi: 299
+      healed:
+        :red:
+          Izzii: 613
+          nTraum: 50
+          Warcloud: 235
+          Koala: 86
+        :blu:
+          fr0w  ✈: 88
+          ! '[En] Klogar': 266
+          kntsfld_leppi: 61
+          \V/ » .kr4tos digga?!: 288
+          cruZer: 178
+      heals:
+        :red:
+          doks: 984
+        :blu:
+          \V/ » Cube: 881
+    start_time: 798.0
+    winner: :blu
+    number: '4'
+    name: ! '#CP_cap_red_cp1'
+    end_time: 975.0
+  start_time: 682.0
+  winner: :blu
+  end_time: 975.0
+scores:
+- :red: 0
+  :blu: 0
+- :red: 0
+  :blu: 1
+- :red: 0
+  :blu: 2
+- :red: 0
+  :blu: 3
+- :red: 0
+  :blu: 4
+- :red: 0
+  :blu: 5
+red: Red
+blu: Blu
+map:
+date: 2012-10-30 21:45:26.000000000 +01:00
+end_time: 981.0

@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - ree
+bundler_args: --without development
+branches:
+  only:
+    - master
+notifications:
+  irc: "irc.quakenet.org#tf2stats"
