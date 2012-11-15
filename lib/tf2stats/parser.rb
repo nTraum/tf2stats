@@ -14,11 +14,12 @@ module Tf2Stats
     @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
     @@DATE_FORMAT = '%m/%d/%Y - %T'
 
-    def initialize
+    def initialize(verbose=false)
       @match = @curr_round = @curr_cap = nil
       @valid = @match_finished = false
       @log = Logger.new(STDOUT)
-      @log.level = Logger::INFO
+      @log.level = Logger::INFO if verbose
+      @log.level = Logger::WARN unless verbose
       @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
 
