@@ -12,6 +12,8 @@ module Tf2Stats
     @@REGEX_KILL = /L (?'date'.*): "(?'killer'.*)<\d+><STEAM_\S*><(?'killer_team'Red|Blue)>" killed "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" with/
     @@REGEX_ASSIST = /L (?'date'.*): "(?'assistant'.*)<\d+><STEAM_\S*><(?'assistant_team'Red|Blue)>" triggered "kill assist" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>"/
     @@REGEX_CAPTURE = /L (?'date'.*): Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'number'\d+)"\) \(cpname "(?'name'.*)"\) \(numcappers/
+    @@REGEX_CHAT_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say "(?'message'.*)"/
+    @@REGEX_CHAT_TEAM_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say_team "(?'message'.*)"/
     @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
     @@DATE_FORMAT = '%m/%d/%Y - %T'
 
@@ -63,6 +65,10 @@ module Tf2Stats
           process_kill $1, $2, $3, $4, $5
         when @@REGEX_ASSIST
           process_assist $1, $2, $3, $4, $5
+        when @@REGEX_CHAT_SAY
+          process_say $1, $2, $3, $4
+        when @@REGEX_CHAT_TEAM_SAY
+          process_team_say $1, $2, $3, $4
         end
       end
 
@@ -166,6 +172,20 @@ module Tf2Stats
       date = parseDate(date_str)
       @curr_cap.stats.add_assist @@TEAM_SYMBOL[assistant_team], assistant
       @log.info {"#{duration_to_s (relative_time(date))} - Assist: #{assistant}[#{assistant_team}] => #{target}[#{target_team}]"}
+    end
+
+    def process_say(date_str, player, team, message)
+      return unless @valid
+      date = parseDate(date_str)
+      @match.add_chat_message ChatMessage.new(relative_time(date), @@TEAM_SYMBOL[team], player, message, false)
+      @log.info {"#{duration_to_s (relative_time(date))} - Say: #{player}[#{team}] => '#{message}'"}
+    end
+
+    def process_team_say(date_str, player, team, message)
+      return unless @valid
+      date = parseDate(date_str)
+      @match.add_chat_message ChatMessage.new(relative_time(date), @@TEAM_SYMBOL[team], player, message, true)
+      @log.info {"#{duration_to_s (relative_time(date))} - Say Team: #{player}[#{team}] => '#{message}'"}
     end
   end
 end

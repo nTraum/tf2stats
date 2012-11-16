@@ -1,16 +1,21 @@
 module Tf2Stats
   class Match
-    attr_reader :rounds, :scores, :stats
+    attr_reader :rounds, :scores, :stats, :chat
     attr_accessor :date, :red, :blu, :map, :end_time
 
     def initialize
       @stats = Statistics.new
       @rounds = []
+      @chat = []
       @scores = [{:red => 0, :blu => 0}]
     end
 
     def start_time
       return 0
+    end
+
+    def add_chat_message chat_message
+      @chat << chat_message
     end
 
     def duration
