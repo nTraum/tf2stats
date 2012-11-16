@@ -26,7 +26,7 @@ Feed the Parser with a log file:
 ```ruby
 require 'tf2stats'
 parser = Tf2Stats::Parser.new
-match = match = parser.parse_file('example.log', :red => 'TLR', :blu => 'CC', :map => 'cp_granary')
+match = parser.parse_file('example.log', :red => 'TLR', :blu => 'CC', :map => 'cp_granary')
 # match = parser.parse_file('example.log')
 ```
 
