@@ -2,21 +2,25 @@ require 'date'
 require 'logger'
 
 module Tf2Stats
-  class Parser
-    @@REGEX_ROUND_START = /L (?'date'.*): World triggered "Round_Start"/
-    @@REGEX_ROUND_END_WIN = /L (?'date'.*): World triggered "Round_Win" \(winner "(?'team'Red|Blue)"\)/
-    @@REGEX_ROUND_END_STALEMATE = /L (?'date'.*): World triggered "Round_Stalemate"/
-    @@REGEX_MATCH_END = /L (?'date'.*): World triggered "Game_Over" reason "/
-    @@REGEX_DAMAGE = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" triggered "damage" \(damage "(?'value'\d+)"\)/
-    @@REGEX_HEAL = /L (?'date'.*): "(?'healer'.*)<\d+><STEAM_\S*><(?'healer_team'Red|Blue)>" triggered "healed" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" \(healing "(?'value'\d+)"\)/
-    @@REGEX_KILL = /L (?'date'.*): "(?'killer'.*)<\d+><STEAM_\S*><(?'killer_team'Red|Blue)>" killed "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" with/
-    @@REGEX_ASSIST = /L (?'date'.*): "(?'assistant'.*)<\d+><STEAM_\S*><(?'assistant_team'Red|Blue)>" triggered "kill assist" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>"/
-    @@REGEX_CAPTURE = /L (?'date'.*): Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'number'\d+)"\) \(cpname "(?'name'.*)"\) \(numcappers/
-    @@REGEX_CHAT_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say "(?'message'.*)"/
-    @@REGEX_CHAT_TEAM_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say_team "(?'message'.*)"/
-    @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
-    @@DATE_FORMAT = '%m/%d/%Y - %T'
 
+  class Parser
+    REGEX_ROUND_START = /L (?'date'.*): World triggered "Round_Start"/
+    REGEX_ROUND_END_WIN = /L (?'date'.*): World triggered "Round_Win" \(winner "(?'team'Red|Blue)"\)/
+    REGEX_ROUND_END_STALEMATE = /L (?'date'.*): World triggered "Round_Stalemate"/
+    REGEX_MATCH_END = /L (?'date'.*): World triggered "Game_Over" reason "/
+    REGEX_DAMAGE = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" triggered "damage" \(damage "(?'value'\d+)"\)/
+    REGEX_HEAL = /L (?'date'.*): "(?'healer'.*)<\d+><STEAM_\S*><(?'healer_team'Red|Blue)>" triggered "healed" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" \(healing "(?'value'\d+)"\)/
+    REGEX_KILL = /L (?'date'.*): "(?'killer'.*)<\d+><STEAM_\S*><(?'killer_team'Red|Blue)>" killed "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" with/
+    REGEX_ASSIST = /L (?'date'.*): "(?'assistant'.*)<\d+><STEAM_\S*><(?'assistant_team'Red|Blue)>" triggered "kill assist" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>"/
+    REGEX_CAPTURE = /L (?'date'.*): Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'number'\d+)"\) \(cpname "(?'name'.*)"\) \(numcappers/
+    REGEX_CHAT_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say "(?'message'.*)"/
+    REGEX_CHAT_TEAM_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say_team "(?'message'.*)"/
+    DATE_FORMAT = '%m/%d/%Y - %T'
+    private_constant :REGEX_ROUND_START, :REGEX_ROUND_END_WIN, :REGEX_ROUND_END_STALEMATE, :REGEX_MATCH_END, :REGEX_DAMAGE, :REGEX_HEAL, :REGEX_KILL, :REGEX_ASSIST, :REGEX_CAPTURE, :REGEX_CHAT_SAY, :REGEX_CHAT_TEAM_SAY, :DATE_FORMAT
+
+    @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
+
+    # @param  verbose [Boolean] Outputs parsing information to STDOUT if set to true
     def initialize(verbose=false)
       @match = @curr_round = @curr_cap = nil
       @valid = @match_finished = false
@@ -26,12 +30,31 @@ module Tf2Stats
       @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
 
+
+    # parses the specified log file
+    #
+    # @param  file [String] path to the log file
+    # @param  options (see #parse_string)
+    # @option (see #parse_string)
+    #
+    # @return (see #parse_string)
     def parse_file (file, options={})
       return unless File.readable?(file)
       @log.info {"Parsing '#{file}'"}
       File.open(file) {|f| parse_string(f.read, options)}
     end
 
+
+    #
+    # parses the specified String
+    # @param  string [String] the content of the log file which should be parsed
+    # @param  options [Hash] options to specify the match that will be parsed
+    # @option options [String] :red (Red) name of team RED
+    # @option options [String] :blu (Blu) name of team BLU
+    # @option options [String] :map (N/A) name of the map
+    #
+    #
+    # @return [Match] the resulting Match object
     def parse_string (string, options={})
       default = {:red => 'Red', :blu => 'Blu', :map => 'N/A'}
       options = default.merge(options)
@@ -47,27 +70,27 @@ module Tf2Stats
         @log.debug{line_number}
         break if @match_finished
         case l
-        when @@REGEX_ROUND_START
+        when REGEX_ROUND_START
           process_round_start $1
-        when @@REGEX_ROUND_END_WIN
+        when REGEX_ROUND_END_WIN
           process_round_end_win $1, $2
-        when @@REGEX_ROUND_END_STALEMATE
+        when REGEX_ROUND_END_STALEMATE
           process_round_end_stalemate $1
-        when @@REGEX_MATCH_END
+        when REGEX_MATCH_END
           process_match_end $1
-        when @@REGEX_CAPTURE
+        when REGEX_CAPTURE
           process_capture $1, $2, $3, $4
-        when @@REGEX_DAMAGE
+        when REGEX_DAMAGE
           process_damage $1, $2, $3, $4
-        when @@REGEX_HEAL
+        when REGEX_HEAL
           process_heal $1, $2, $3, $4, $5, $6
-        when @@REGEX_KILL
+        when REGEX_KILL
           process_kill $1, $2, $3, $4, $5
-        when @@REGEX_ASSIST
+        when REGEX_ASSIST
           process_assist $1, $2, $3, $4, $5
-        when @@REGEX_CHAT_SAY
+        when REGEX_CHAT_SAY
           process_say $1, $2, $3, $4
-        when @@REGEX_CHAT_TEAM_SAY
+        when REGEX_CHAT_TEAM_SAY
           process_team_say $1, $2, $3, $4
         end
       end
@@ -79,13 +102,23 @@ module Tf2Stats
 
     private
     def parseDate (string)
-      DateTime.strptime(string, @@DATE_FORMAT).to_time
+      DateTime.strptime(string, DATE_FORMAT).to_time
     end
 
+
+    # calculates the relative time between the specified date and match begin
+    # @param  date [Date] the date
+    #
+    # @return [Float] amount of seconds passed between the specified date and match begin
     def relative_time (date)
       date - @match.date
     end
 
+
+    # nicely formats a duration to [MM:SS]
+    # @param  duration [Float] duration
+    #
+    # @return [String] String in the format MM:SS
     def duration_to_s (duration)
       secs  = duration.to_int
       mins  = secs / 60
