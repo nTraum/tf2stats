@@ -10,5 +10,23 @@ module Tf2Stats
     def duration
       @end_time - @start_time
     end
+
+    # determines if team BLU won this cp
+    # @return [Boolean] true if team BLU won this cp
+    def won_blu?
+      :blu == @winner
+    end
+
+    # determines if team RED won this cp
+    # @return [Boolean] true if team RED won this cp
+    def won_red?
+      :red == @winner
+    end
+
+    # determines if this cp ended in a tie
+    # @return [Boolean] true if none of both teams won
+    def stalemate?
+      @winner.nil?
+    end
   end
 end
