@@ -1,6 +1,6 @@
 module Tf2Stats
   class Statistics
-    attr_reader :kills,:assists, :deaths, :damage, :healed, :heals
+    attr_reader :kills, :assists, :deaths, :damage, :healed, :heals
 
     def initialize
       @kills = {:red => Hash.new(0), :blu => Hash.new(0)}
