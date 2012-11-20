@@ -4,19 +4,23 @@ require 'logger'
 module Tf2Stats
 
   class Parser
-    REGEX_ROUND_START = /L (?'date'.*): World triggered "Round_Start"/
-    REGEX_ROUND_END_WIN = /L (?'date'.*): World triggered "Round_Win" \(winner "(?'team'Red|Blue)"\)/
-    REGEX_ROUND_END_STALEMATE = /L (?'date'.*): World triggered "Round_Stalemate"/
-    REGEX_MATCH_END = /L (?'date'.*): World triggered "Game_Over" reason "/
-    REGEX_DAMAGE = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" triggered "damage" \(damage "(?'value'\d+)"\)/
-    REGEX_HEAL = /L (?'date'.*): "(?'healer'.*)<\d+><STEAM_\S*><(?'healer_team'Red|Blue)>" triggered "healed" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" \(healing "(?'value'\d+)"\)/
-    REGEX_KILL = /L (?'date'.*): "(?'killer'.*)<\d+><STEAM_\S*><(?'killer_team'Red|Blue)>" killed "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>" with/
-    REGEX_ASSIST = /L (?'date'.*): "(?'assistant'.*)<\d+><STEAM_\S*><(?'assistant_team'Red|Blue)>" triggered "kill assist" against "(?'target'.*)<\d+><STEAM_\S*><(?'target_team'Red|Blue)>"/
-    REGEX_CAPTURE = /L (?'date'.*): Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'number'\d+)"\) \(cpname "(?'name'.*)"\) \(numcappers/
-    REGEX_CHAT_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say "(?'message'.*)"/
-    REGEX_CHAT_TEAM_SAY = /L (?'date'.*): "(?'player'.*)<\d+><STEAM_\S*><(?'team'Red|Blue)>" say_team "(?'message'.*)"/
+    REGEX_DATE = 'L (?\'date\'.*):'
+    REGEX_PLAYER = '"(?\'player_nick\'.+)<(?\'player_uid\'\d+)><(?\'player_steamid\'STEAM_\S+)><(?\'player_team\'Red|Blue)>"'
+    REGEX_TARGET = '"(?\'target_nick\'.+)<(?\'target_uid\'\d+)><(?\'target_steamid\'STEAM_\S+)><(?\'target_team\'Red|Blue)>"'
+    REGEX_MESSAGE = '"(?\'message\'.*)"'
+    REGEX_ROUND_START = /#{REGEX_DATE} World triggered "Round_Start"/
+    REGEX_ROUND_END_WIN = /#{REGEX_DATE} World triggered "Round_Win" \(winner "(?'team'Red|Blue)"\)/
+    REGEX_ROUND_END_STALEMATE = /#{REGEX_DATE} World triggered "Round_Stalemate"/
+    REGEX_MATCH_END = /#{REGEX_DATE} World triggered "Game_Over" reason "/
+    REGEX_DAMAGE = /#{REGEX_DATE} #{REGEX_PLAYER} triggered "damage" \(damage "(?'value'\d+)"\)/
+    REGEX_HEAL = /#{REGEX_DATE} #{REGEX_PLAYER} triggered "healed" against #{REGEX_TARGET} \(healing "(?'value'\d+)"\)/
+    REGEX_KILL = /#{REGEX_DATE} #{REGEX_PLAYER} killed #{REGEX_TARGET} with/
+    REGEX_ASSIST = /#{REGEX_DATE} #{REGEX_PLAYER} triggered "kill assist" against #{REGEX_TARGET}/
+    REGEX_CAPTURE = /#{REGEX_DATE} Team "(?'team'Red|Blue)" triggered "pointcaptured" \(cp "(?'cp_number'\d+)"\) \(cpname "(?'cp_name'.*)"\) \(numcappers/
+    REGEX_CHAT_SAY = /#{REGEX_DATE} #{REGEX_PLAYER} say #{REGEX_MESSAGE}/
+    REGEX_CHAT_TEAM_SAY = /#{REGEX_DATE} #{REGEX_PLAYER} say_team #{REGEX_MESSAGE}/
     DATE_FORMAT = '%m/%d/%Y - %T'
-    private_constant :REGEX_ROUND_START, :REGEX_ROUND_END_WIN, :REGEX_ROUND_END_STALEMATE, :REGEX_MATCH_END, :REGEX_DAMAGE, :REGEX_HEAL, :REGEX_KILL, :REGEX_ASSIST, :REGEX_CAPTURE, :REGEX_CHAT_SAY, :REGEX_CHAT_TEAM_SAY, :DATE_FORMAT
+    private_constant :REGEX_PLAYER, :REGEX_TARGET, :REGEX_ROUND_START, :REGEX_ROUND_END_WIN, :REGEX_ROUND_END_STALEMATE, :REGEX_MATCH_END, :REGEX_DAMAGE, :REGEX_HEAL, :REGEX_KILL, :REGEX_ASSIST, :REGEX_CAPTURE, :REGEX_CHAT_SAY, :REGEX_CHAT_TEAM_SAY, :DATE_FORMAT
 
     @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
 
@@ -29,7 +33,6 @@ module Tf2Stats
       @log.level = Logger::WARN unless verbose
       @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
-
 
     # parses the specified log file
     #
@@ -44,8 +47,6 @@ module Tf2Stats
       File.open(file) {|f| parse_string(f.read, options)}
     end
 
-
-    #
     # parses the specified String
     # @param  string [String] the content of the log file which should be parsed
     # @param  options [Hash] options to specify the match that will be parsed
@@ -69,29 +70,29 @@ module Tf2Stats
         line_number += 1
         @log.debug{line_number}
         break if @match_finished
-        case l
-        when REGEX_ROUND_START
-          process_round_start $1
-        when REGEX_ROUND_END_WIN
-          process_round_end_win $1, $2
-        when REGEX_ROUND_END_STALEMATE
-          process_round_end_stalemate $1
-        when REGEX_MATCH_END
-          process_match_end $1
-        when REGEX_CAPTURE
-          process_capture $1, $2, $3, $4
-        when REGEX_DAMAGE
-          process_damage $1, $2, $3, $4
-        when REGEX_HEAL
-          process_heal $1, $2, $3, $4, $5, $6
-        when REGEX_KILL
-          process_kill $1, $2, $3, $4, $5
-        when REGEX_ASSIST
-          process_assist $1, $2, $3, $4, $5
-        when REGEX_CHAT_SAY
-          process_say $1, $2, $3, $4
-        when REGEX_CHAT_TEAM_SAY
-          process_team_say $1, $2, $3, $4
+
+        if res = l.match(REGEX_ROUND_START)
+          process_round_start res[:date]
+        elsif res = l.match(REGEX_ROUND_END_WIN)
+          process_round_end_win res[:date], res[:team]
+        elsif res = l.match(REGEX_ROUND_END_STALEMATE)
+          process_round_end_stalemate res[:date]
+        elsif res = l.match(REGEX_MATCH_END)
+          process_match_end res[:date]
+        elsif res = l.match(REGEX_CAPTURE)
+          process_capture res[:date], res[:team], res[:cp_number], res[:cp_name]
+        elsif res = l.match(REGEX_DAMAGE)
+          process_damage res[:date], res[:player_nick], res[:player_team], res[:value]
+        elsif res = l.match(REGEX_HEAL)
+          process_heal res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team], res[:value]
+        elsif res = l.match(REGEX_KILL)
+          process_kill res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team]
+        elsif res = l.match(REGEX_ASSIST)
+          process_assist res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team]
+        elsif res = l.match(REGEX_CHAT_SAY)
+          process_say res[:date], res[:player_nick], res[:player_team], res[:message]
+        elsif res = l.match(REGEX_CHAT_TEAM_SAY)
+          process_team_say res[:date], res[:player_nick], res[:player_team], res[:message]
         end
       end
 
