@@ -151,7 +151,7 @@ module Tf2Stats
       date = parseDate(date_str)
       @valid = false
       @curr_round.winner = nil
-      @ccurr_round.end_time = relative_time(date)
+      @curr_round.end_time = relative_time(date)
       @match.add_round @curr_round
       @log.info {"#{duration_to_s (relative_time(date))} - Round stalemate"}
 
