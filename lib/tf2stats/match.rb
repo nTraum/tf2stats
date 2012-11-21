@@ -4,6 +4,8 @@ module Tf2Stats
     attr_reader :rounds, :scores, :stats, :chat
     attr_accessor :date, :red, :blu, :map, :end_time
 
+    include Winnable
+
     def initialize
       @stats = Statistics.new
       @rounds = []
@@ -58,26 +60,8 @@ module Tf2Stats
     # winner of the match
     # @return [Symbol, nil] winner of the match, either nil, :blu or :red
     def winner
-      return :blu if won_blu?
-      return :red if won_red?
-    end
-
-    # determines if team BLU won the match
-    # @return [Boolean] true if team BLU won
-    def won_blu?
-      @scores.last[:red] < @scores.last[:blu]
-    end
-
-    # determines if team RED won the match
-    # @return [Boolean] true if team RED won
-    def won_red?
-      @scores.last[:red] > @scores.last[:blu]
-    end
-
-    # determines if this match ended in a tie
-    # @return [Boolean] true if none of both teams won
-    def stalemate?
-      won_blu? == false && won_red? == false
+      return :blu if final_score[:red] < final_score[:red]
+      return :red if final_score[:red] > final_score[:blu]
     end
 
     private

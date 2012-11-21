@@ -17,6 +17,8 @@ module Tf2Stats
     attr_reader :captures, :stats
     attr_accessor :start_time, :end_time, :winner
 
+    include Winnable
+
     def initialize
       @stats = Statistics.new
       @captures = []
@@ -28,25 +30,6 @@ module Tf2Stats
       @stats.add_sub_stats point_capture.stats
       @captures << point_capture
     end
-
-    # determines if team BLU won this round
-    # @return [Boolean] true if team BLU won this round
-    def won_blu?
-      :blu == @winner
-    end
-
-    # determines if team RED won this round
-    # @return [Boolean] true if team RED won this round
-    def won_red?
-      :red == @winner
-    end
-
-    # determines if this rounded ended in a tie
-    # @return [Boolean] true if none of both teams won
-    def stalemate?
-      @winner.nil?
-    end
-
 
     # determines if the round winner also won the initial mid fight
     # @return [Boolean] true if round winner was also winner of the first Capture Point
