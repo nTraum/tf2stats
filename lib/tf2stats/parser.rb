@@ -106,7 +106,6 @@ module Tf2Stats
       DateTime.strptime(string, DATE_FORMAT).to_time
     end
 
-
     # calculates the relative time between the specified date and match begin
     # @param  date [Date] the date
     #
@@ -114,7 +113,6 @@ module Tf2Stats
     def relative_time (date)
       (date - @match.date).to_i
     end
-
 
     # nicely formats a duration to [MM:SS]
     # @param  duration [Float] duration
@@ -130,10 +128,8 @@ module Tf2Stats
       date = parseDate(date_str)
       @valid = true
       @match.date = date if @match.rounds.empty?
-      @curr_cap = PointCapture.new
-      @curr_cap.start_time = relative_time(date)
-      @curr_round = Round.new
-      @curr_round.start_time = relative_time(date)
+      @curr_cap = PointCapture.new(relative_time(date))
+      @curr_round = Round.new(relative_time(date))
       @log.info {"#{duration_to_s (relative_time(date))} - Match start"} if @match.rounds.empty?
       @log.info {"#{duration_to_s (relative_time(date))} - Round start"}
     end
@@ -141,8 +137,7 @@ module Tf2Stats
     def process_round_end_win (date_str, team)
       date = parseDate(date_str)
       @valid = false
-      @curr_round.winner = @@TEAM_SYMBOL[team]
-      @curr_round.end_time = relative_time(date)
+      @curr_round.is_finished(relative_time(date), @@TEAM_SYMBOL[team])
       @match.add_round @curr_round
       @log.info {"#{duration_to_s (relative_time(date))} - Round win: #{team}"}
     end
@@ -150,8 +145,7 @@ module Tf2Stats
     def process_round_end_stalemate (date_str)
       date = parseDate(date_str)
       @valid = false
-      @curr_round.winner = nil
-      @curr_round.end_time = relative_time(date)
+      @curr_round.is_finished(relative_time(date), nil)
       @match.add_round @curr_round
       @log.info {"#{duration_to_s (relative_time(date))} - Round stalemate"}
 
@@ -159,7 +153,7 @@ module Tf2Stats
 
     def process_match_end (date_str)
       date = parseDate(date_str)
-      @match.end_time = relative_time(date)
+      @match.is_finished(relative_time(date))
       @valid = false
       @match_finished = true
       @log.info {"#{duration_to_s (relative_time(date))} - Game over"}
@@ -167,14 +161,10 @@ module Tf2Stats
 
     def process_capture (date_str, team, cap_number, cap_name)
       date = parseDate(date_str)
-      @curr_cap.winner = @@TEAM_SYMBOL[team]
-      @curr_cap.number = cap_number
-      @curr_cap.name = cap_name
-      @curr_cap.end_time = relative_time(date)
+      @curr_cap.is_capped(relative_time(date), @@TEAM_SYMBOL[team], cap_number, cap_name)
       @curr_round.add_capture @curr_cap
 
-      @curr_cap = PointCapture.new
-      @curr_cap.start_time = relative_time(date)
+      @curr_cap = PointCapture.new(relative_time(date))
       @log.info {"#{duration_to_s (relative_time(date))} - Capture: Team #{team} => #{cap_name}(#{cap_number})"}
     end
 

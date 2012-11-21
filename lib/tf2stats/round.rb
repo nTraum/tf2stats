@@ -14,14 +14,15 @@ module Tf2Stats
   #@!attribute winner
   #   @return [Symbol, nil] winner of the round, either nil, :blu or :red
   class Round
-    attr_reader :captures, :stats
-    attr_accessor :start_time, :end_time, :winner
+    attr_reader :captures, :stats, :start_time, :end_time, :winner
 
     include Winnable
+    include TimeLimitable
 
-    def initialize
+    def initialize(start_time)
       @stats = Statistics.new
       @captures = []
+      @start_time = start_time
     end
 
     # adds a capture to the round
@@ -31,24 +32,16 @@ module Tf2Stats
       @captures << point_capture
     end
 
+    def is_finished(end_time, team)
+      @end_time = end_time
+      @winner = team
+    end
+
     # determines if the round winner also won the initial mid fight
     # @return [Boolean] true if round winner was also winner of the first Capture Point
     def won_mid?
       return nil if @captures.empty?
       return @winner == @captures[0].winner
-    end
-
-
-    # number of captures in this round
-    # @return [Fixnum] number of captures happened in this round
-    def captures_count
-      @captures.size
-    end
-
-    # duration of the round in seconds
-    # @return [Fixnum] duration of the round in seconds
-    def duration
-      @end_time - @start_time
     end
   end
 end

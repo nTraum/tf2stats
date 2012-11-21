@@ -23,14 +23,14 @@ describe Tf2Stats::Match do
     end
 
     describe '#duration' do
-      it 'has no duration' do
-        match.duration.should be_nil
+      it 'has zero duration' do
+        match.duration.should eql 0
       end
     end
 
     describe '#end_time' do
-      it 'has no end_time' do
-        match.end_time.should be_nil
+      it 'ends at relative time 0' do
+        match.end_time.should eql 0
       end
     end
 
@@ -46,12 +46,12 @@ describe Tf2Stats::Match do
       end
     end
 
-    describe '#final_score' do
+    describe '#score' do
       it 'has zero points for team red' do
-        match.final_score[:red].should eql 0
+        match.score[:red].should eql 0
       end
       it 'has zero points for team blu' do
-        match.final_score[:blu].should eql 0
+        match.score[:blu].should eql 0
       end
     end
 
