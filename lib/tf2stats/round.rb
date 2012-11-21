@@ -8,9 +8,9 @@ module Tf2Stats
   #@!attribute [r] stats
   #   @return [Statistics] statistics of this round
   #@!attribute start_time
-  #   @return [Float] time of round start in seconds, relative to match begin
+  #   @return [Fixnum] time of round start in seconds, relative to match begin
   #@!attribute end_time
-  #   @return [Float] time of round end in seconds, relative to match begin
+  #   @return [Fixnum] time of round end in seconds, relative to match begin
   #@!attribute winner
   #   @return [Symbol, nil] winner of the round, either nil, :blu or :red
   class Round
@@ -46,7 +46,7 @@ module Tf2Stats
     end
 
     # duration of the round in seconds
-    # @return [Float] duration of the round in seconds
+    # @return [Fixnum] duration of the round in seconds
     def duration
       @end_time - @start_time
     end

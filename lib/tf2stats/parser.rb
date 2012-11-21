@@ -110,9 +110,9 @@ module Tf2Stats
     # calculates the relative time between the specified date and match begin
     # @param  date [Date] the date
     #
-    # @return [Float] amount of seconds passed between the specified date and match begin
+    # @return [Fixnum] amount of seconds passed between the specified date and match begin
     def relative_time (date)
-      date - @match.date
+      (date - @match.date).to_i
     end
 
 

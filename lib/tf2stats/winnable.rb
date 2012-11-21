@@ -1,7 +1,6 @@
 module Tf2Stats
   module Winnable
 
-
     # returns true if team BLU won
     #
     # @return [Boolean] true if team BLU won, false if not

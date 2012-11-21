@@ -29,7 +29,7 @@ module Tf2Stats
 
 
     # duration if the actual match in seconds
-    # @return [Float] duration of the whole match, in seconds
+    # @return [Fixnum] duration of the whole match, in seconds
     def duration
       @end_time
     end
