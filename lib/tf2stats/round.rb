@@ -3,12 +3,13 @@
 module Tf2Stats
 
   class Round
-    attr_reader :captures, :stats, :start_time, :end_time, :winner
+    attr_reader :captures, :stats, :start_time, :end_time, :winner, :finished
 
     include Winnable
-    include TimeLimitable
+    include TimeLimited
 
     def initialize(start_time)
+      @finished = false
       @stats = Statistics.new
       @captures = []
       @start_time = start_time
@@ -19,7 +20,9 @@ module Tf2Stats
       @captures << point_capture
     end
 
-    def is_finished(end_time, team)
+    def finish(end_time, team)
+      return if @finished
+      @finished = true
       @end_time = end_time
       @winner = team
     end

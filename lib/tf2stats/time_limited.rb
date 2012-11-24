@@ -1,6 +1,7 @@
 module Tf2Stats
-  module TimeLimitable
+  module TimeLimited
     def duration
+      return if end_time.nil? or start_time.nil?
       end_time - start_time
     end
   end

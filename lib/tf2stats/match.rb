@@ -1,14 +1,14 @@
 module Tf2Stats
 
   class Match
-    attr_reader :rounds, :scores, :stats, :chat, :end_time
+    attr_reader :rounds, :scores, :stats, :chat, :end_time, :finished
     attr_accessor :date, :red, :blu, :map
 
     include Winnable
-    include TimeLimitable
+    include TimeLimited
 
     def initialize
-      @end_time = 0
+      @finished = false
       @stats = Statistics.new
       @rounds = []
       @chat = []
@@ -38,7 +38,9 @@ module Tf2Stats
       return :red if score[:red] > score[:blu]
     end
 
-    def is_finished(end_time)
+    def finish(end_time)
+      return if @finished
+      @finished = true
       @end_time = end_time
     end
 

@@ -65,17 +65,17 @@ module Tf2Stats
         elsif res = l.match(REGEX_CAPTURE)
           process_capture res[:date], res[:team], res[:cp_number], res[:cp_name]
         elsif res = l.match(REGEX_DAMAGE)
-          process_damage res[:date], res[:player_nick], res[:player_team], res[:value]
+          process_damage res[:date], res[:player_steamid], res[:player_team], res[:value]
         elsif res = l.match(REGEX_HEAL)
-          process_heal res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team], res[:value]
+          process_heal res[:date], res[:player_steamid], res[:player_team], res[:target_steamid], res[:target_team], res[:value]
         elsif res = l.match(REGEX_KILL)
-          process_kill res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team]
+          process_kill res[:date], res[:player_steamid], res[:player_team], res[:target_steamid], res[:target_team]
         elsif res = l.match(REGEX_ASSIST)
-          process_assist res[:date], res[:player_nick], res[:player_team], res[:target_nick], res[:target_team]
+          process_assist res[:date], res[:player_steamid], res[:player_team], res[:target_steamid], res[:target_team]
         elsif res = l.match(REGEX_CHAT_SAY)
-          process_say res[:date], res[:player_nick], res[:player_team], res[:message]
+          process_say res[:date], res[:player_steamid], res[:player_team], res[:message]
         elsif res = l.match(REGEX_CHAT_TEAM_SAY)
-          process_team_say res[:date], res[:player_nick], res[:player_team], res[:message]
+          process_team_say res[:date], res[:player_steamid], res[:player_team], res[:message]
         end
       end
 
@@ -112,7 +112,7 @@ module Tf2Stats
     def process_round_end_win (date_str, team)
       date = parseDate(date_str)
       @valid = false
-      @curr_round.is_finished(relative_time(date), @@TEAM_SYMBOL[team])
+      @curr_round.finish(relative_time(date), @@TEAM_SYMBOL[team])
       @match.add_round @curr_round
       @log.info {"#{duration_to_s (relative_time(date))} - Round win: #{team}"}
     end
@@ -120,7 +120,7 @@ module Tf2Stats
     def process_round_end_stalemate (date_str)
       date = parseDate(date_str)
       @valid = false
-      @curr_round.is_finished(relative_time(date), nil)
+      @curr_round.finish(relative_time(date), nil)
       @match.add_round @curr_round
       @log.info {"#{duration_to_s (relative_time(date))} - Round stalemate"}
 
@@ -128,7 +128,7 @@ module Tf2Stats
 
     def process_match_end (date_str)
       date = parseDate(date_str)
-      @match.is_finished(relative_time(date))
+      @match.finish(relative_time(date))
       @valid = false
       @match_finished = true
       @log.info {"#{duration_to_s (relative_time(date))} - Game over"}

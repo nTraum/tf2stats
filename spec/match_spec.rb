@@ -23,14 +23,14 @@ describe Tf2Stats::Match do
     end
 
     describe '#duration' do
-      it 'has zero duration' do
-        match.duration.should eql 0
+      it 'has no duration' do
+        match.duration.should be_nil
       end
     end
 
     describe '#end_time' do
-      it 'ends at relative time 0' do
-        match.end_time.should eql 0
+      it 'has no endtime' do
+        match.end_time.should be_nil
       end
     end
 
