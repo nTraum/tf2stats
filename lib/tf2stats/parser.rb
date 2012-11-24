@@ -24,7 +24,6 @@ module Tf2Stats
 
     @@TEAM_SYMBOL = {'Red' => :red, 'Blue' => :blu}
 
-    # @param  verbose [Boolean] Outputs parsing information to STDOUT if set to true
     def initialize(verbose=false)
       @match = @curr_round = @curr_cap = nil
       @valid = @match_finished = false
@@ -34,28 +33,12 @@ module Tf2Stats
       @log.formatter = proc {|severity, datetime, progname, msg| "[#{severity}] #{msg}\n"}
     end
 
-    # parses the specified log file
-    #
-    # @param  file [String] path to the log file
-    # @param  options (see #parse_string)
-    # @option (see #parse_string)
-    #
-    # @return (see #parse_string)
     def parse_file (file, options={})
       return unless File.readable?(file)
       @log.info {"Parsing '#{file}'"}
       File.open(file) {|f| parse_string(f.read, options)}
     end
 
-    # parses the specified String
-    # @param  string [String] the content of the log file which should be parsed
-    # @param  options [Hash] options to specify the match that will be parsed
-    # @option options [String] :red (Red) name of team RED
-    # @option options [String] :blu (Blu) name of team BLU
-    # @option options [String] :map (N/A) name of the map
-    #
-    #
-    # @return [Match] the resulting Match object
     def parse_string (string, options={})
       default = {:red => 'Red', :blu => 'Blu', :map => 'N/A'}
       options = default.merge(options)
@@ -106,18 +89,10 @@ module Tf2Stats
       DateTime.strptime(string, DATE_FORMAT).to_time
     end
 
-    # calculates the relative time between the specified date and match begin
-    # @param  date [Date] the date
-    #
-    # @return [Fixnum] amount of seconds passed between the specified date and match begin
     def relative_time (date)
       (date - @match.date).to_i
     end
 
-    # nicely formats a duration to [MM:SS]
-    # @param  duration [Float] duration
-    #
-    # @return [String] String in the format MM:SS
     def duration_to_s (duration)
       secs  = duration.to_int
       mins  = secs / 60
