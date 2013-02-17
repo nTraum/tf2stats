@@ -36,7 +36,7 @@ module Tf2Stats
     def parse_file (file, options={})
       return unless File.readable?(file)
       @log.info {"Parsing '#{file}'"}
-      File.open(file) {|f| parse_string(f.read, options)}
+      File.open(file) {|f| parse_string(f.read.force_encoding('UTF-8').encode('UTF-16LE', :invalid => :replace, :replace => '').encode('UTF-8'), options)}
     end
 
     def parse_string (string, options={})
